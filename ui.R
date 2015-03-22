@@ -84,6 +84,7 @@ shinyUI(
   mainPanel(
     h3(textOutput("caption")), 
     h5(textOutput("subCaption")),
+    h5(textOutput("pinCaption")),
   #  h5("", a("Blog for more info", href="http://bravo0123.tumblr.com")),
   #	withProgress(message = 'be patient!', value = .9, {
     plotOutput("openIntPlot")

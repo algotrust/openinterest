@@ -42,29 +42,29 @@ shinyServer(function(input, output, session) {
 	expText <- reactive({input$yymmdd})
 	strikes <- reactive({input$strikes})
 	smoothOn <- reactive({input$smoothOn})
-# withProgress(message = 'waiting for data', value = 0, {
-	lastQuote <- reactive({getQuote(stockText())$Last})
-	incProgress(0.2, detail = "got quote")
-	chain <- reactive({getYahooDataReformatted(stockText(), expText())})
-#	incProgress(0.4, detail = "got options")
 	
+	lastQuote <- reactive({getQuote(stockText())$Last})
+	chain <- reactive({getYahooDataReformatted(stockText(), expText())})
 	output$caption <- renderText({paste(stockText(), " $", lastQuote(), " Expiration ", expText())})
 	output$subCaption <- reactive({wasUpdatedToday(stockText(),chain(),expText())})
 	
-	if (!is.null(chain)) 
-	reactive({cat("good option chain ", stockText(), expText(), "\n")})
-#	incProgress(0.8, detail = "ready to plot")		
-#	})		
+	cleanChain <- reactive({cleanUpChain(chain())})
+	strikePar <- reactive({setupStrikeParam(chain(), stock(), strikes(), lastQuote(), smoothOn())})
+	subChain <- reactive({truncChain(chain(), strikePar(), smoothOn())})
+	output$pinCaption <- renderText({paste("Expiration Pin Range:", getPin(subChain()), "  (see notes)")})
+
 output$openIntPlot <- renderPlot({
-	#withProgress(message = 'waiting for plot', value = 0, {
-    if (!is.null(chain()))
-    
-    	p <- getPlot(graphType(),chain(), stockText(), strikes(), lastQuote(), smoothOn())
-	else
-		plotError("No Data.  Either wrong date for this stock, or no prior data")	
-#	if (doProgress)		incProgress(0.9, detail = "outputting plot")
-#	browser()
-	print(p)
-#	})
+
+    if (!is.null(chain())) 
+    	p <- switch(graphType(),
+		"OI"=plotOpen(subChain(),strikePar()),
+		"OIvol"= plotVolume(subChain(),strikePar()),
+		"OIDiff"=plotDifference(subChain(),strikePar()),
+		"cummulative"=plotCumm(subChain(),strikePar()),
+		"cummDiff"=plotCummDiff(subChain(),strikePar()),
+		"prettyPlot"=plotDensity(subChain(),strikePar()))
+	 else
+		plotError("No Data.  Either wrong date for this stock, or no prior data")	 
+	p
 	})
 })
