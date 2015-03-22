@@ -1,678 +1,174 @@
-nys="http://emma.msrb.org/SecurityView/SecurityDetailsTrades.aspx?cusip=649787N87"#
-txt<-getURLContent(nys,cookie='Disclaimer=Ratings')
-nys
-txt
-readHTMLTable(htmlParse(txt, asText = TRUE))
-x <- "https://investments.pimco.com/Products/Pages/PlCEF.aspx"
-y <- getURLContent(x)
-y
-install.packages("RandomFields")
-library(RandomFields)
-help(sleep.milli)
-sleep.milli
-ls("package:RandomFields")
-lsp <- function(package, all.names = FALSE, pattern) #
-{#
-  package <- deparse(substitute(package))#
-  ls(#
-      pos = paste("package", package, sep = ":"), #
-      all.names = all.names, #
-      pattern = pattern#
-  )#
-}
-lsp(base)
-lsp(RandomFields)
-library(RandomFields)
-help(sleep.milli)
-??sleep
-help(RandomFields)
-library(babynames)
-head(babyname)
-head(babynames)
-names <- babynames$name
-head(names)
-head(names,1000)
-nrow(names)
-nrow(babynames)
-names(babynames)
-names <- babynames[babynames$sex=="f",]
-head(names)
-head(babynames)
-names <- babynames[babynames$sex=="F",]
-head(names)
-names2 <- names$name
-help(unique)
-uni <- unique(names2)
-nrow(uni)
-nrow(names2)
-nrow(names)
-head(names2)
-head(uni)
-length(uni)
-length(names2)
-l <- uni[uni[1]=="L"]
-head(l)
-x <- uni[1,]
-uni[1]
-uni[[1]]
-class(uni)
-head(uni)
-head(substr(uni,1,1))
-l <- substr(uni,1,1)=="L"
-head(l)
-l <- substr(uni,1,1)=="L"
-l <- uni[substr(uni,1,1)=="L"]
-head(l)
-nrow(l)
-length(l)
-l
-cat(l)
-??babynames
-girls <- babynames[babynames$sex=="F",]$name
-boys <- babynames[babynames$sex=="F",]$name
-library(babynames)#
-girls <- babynames[babynames$sex=="F",]$name#
-girls <- unique(girls)#
-boys <- babynames[babynames$sex=="F",]$name#
-boys <- unique(boys)
-startsWith <- function(names, letter){#
-	namesWithLetter <- names[names[1]==letter]#
-	return(namesWithLetter)#
-}
-startsWith(boys,"D")
-head(boys)
-boys <- babynames[babynames$sex=="M",]$name#
-boys <- unique(boys)
-startsWith <- function(names, letter="A"){#
-	namesWithLetter <- names[names[1]==letter]#
-	return(namesWithLetter)#
-}
-startsWith(boys)
-names <- boys
-head(names)
-letter="A"
-letter
-namesWithLetter <- names[names[1]==letter]
-namesWithLetter
-l <- uni[substr(uni,1,1)=="L"]
-l
-namesWithLetter <- names[substr(uni,1,1)=="L"]
-namesWithLetter
-namesWithLetter <- names[substr(names,1,1)=="L"]
-namesWithLetter
-startsWith <- function(names, letter="A"){#
-	namesWithLetter <- names[substr(names,1,1)=="L"]#
-	return(namesWithLetter)#
-}
-startWith(boys,"D")
-startsWith(boys,"D")
-startsWith <- function(names, letter="A"){#
-	namesWithLetter <- names[substr(names,1,1)==letter]#
-	return(namesWithLetter)#
-}
-startsWith(boys,"D")
-girls <- babynames[babynames$sex=="F",]$name
-names(girls)
-head(girls)
-names(babynames)
-head(babynames)
-help(babynames)
-??babynames
-#test#
+runApp("simpleoption")
 library(shiny)#
-library(babynames)#
-source("~/ShinyApps/babynames/cleanNames.R")#
-startY <- 1880#
-	endY <- 2013#
-	theYears <- c(startY),endY)#
-	sortAlpha <- TRUE#
-	theLetters <- "M"#
-	theSex <- "F"#
-#
-theLookup <- "Mary"#
-names <- parseNames(theSex,theYears,theLetters,sortAlpha)
-#test#
+library(shinyapps)
+runApp("simpleoption")
+setwd("~/ShinyApps")
+runApp("simpleoption")
+runApp("simpleoption")
+runApp("simpleoption")
+p <- ggplot(chain(), aes(x=strike) + geom_area(aes(y = putOI,  fill = "1 put", colour = "1 put",   stat = "bin"), alpha = 0.5)
+runApp("simpleoption")
+runApp("simpleoption")
+runApp("simpleoption")
+runApp("simpleoption")
+runApp("simpleoption")
+runApp("simpleoption")
+runApp("simpleoption")
 library(shiny)#
-library(babynames)#
-source("~/ShinyApps/babynames/cleanNames.R")#
-startY <- 1880#
-	endY <- 2013#
-	theYears <- c(startY,endY)#
-	sortAlpha <- TRUE#
-	theLetters <- "M"#
-	theSex <- "F"#
+library(shinyapps)#
+setwd("~/ShinyApps")
+runApp("tos")
+library(RTDAmeritrade)
+setwd(~/ShinyApps/toscapgains)
+setwd(~/ShinyApps/toscapgains/)
+~/ShinyApps/toscapgains/
+setwd("~/ShinyApps/toscapgains/")
+setwd("~/ShinyApps/toscapgain/")
+setwd("~/ShinyApps/toscapgain/")#
+theFile <- "RC_861525704_20150101_20150321.tsv"#
+data <- read(theFile)
+data <- read.csv(theFile)
+theFile <- "data/RC_861525704_20150101_20150321.tsv"
+data <- read.csv(theFile)
+data <- read.table(theFile)
+help(read.table)
+data <- read.table(theFile, fill=T)
+head(data)
+data <- read.table(theFile, fill=T,header=T)
+head(data)
+names(data)
+head(data)
+data <- read.table(theFile, fill=T,header=T, sep='\t')
+head(data)
+summary(data)
+names(data)
+names(data) <- c("Security" ,      "Trans.type"  ,   "Qty"      ,      "Open.date"   ,   "Adj.cost"  ,     "Close.date" ,    "Adj.proceeds"   ,"adjGain"    ,   "stGain" "ltGain")
+names(data) <- c("Security","Trans.type","Qty","Open.date","Adj.cost","Close.date","Adj.proceeds","adjGain","stGain","ltGain")
+head(data)
+summary(data)
+sum(data$stGain)
+stGain <- as.numeric(stGain)
+stGain <- as.numeric(data$stGain)
+sum(data$stGain)
+data$stGain <- as.numeric(data$stGain)
+sum(data$stGain)
+help(read.table)
+names(data)
+head(data)
+data <- read.table(theFile, fill=T,header=T, sep='\t', as.is=c(3,5,7,8,9,10))
+summary(data)
+help(colClasses)
+head(data)
+data <- read.table(theFile, fill=T,header=T, sep='\t', colClasses=c(character, character, numeric, character, numeric, character, numeric, numeric, numeric, numeric ))
+numeric
+head(data)
+summary(dat)
+summary(data)
+data <- read.table(theFile, fill=T,header=T, sep='\t', colClasses=c("factor", "factor", "numeric", "character", "numeric", "character", "numeric", "numeric", "numeric", "numeric" ))
+setwd("~/ShinyApps/toscapgain/")#
+theFile <- "data/RC_861525704_20150101_20150321.tsv"#
+data <- read.table(theFile, fill=T,header=T, sep='\t', colClasses=c("factor", "factor", "numeric", "character", "numeric", "character", "numeric", "numeric", "numeric", "numeric" ))
+summar(data)
+names(data) <- c("Security","Trans.type","Qty","Open.date","Adj.cost","Close.date","Adj.proceeds","adjGain","stGain","ltGain")
+summary(data)
+sum(data["adjGain:ltGain",])
+sum(data[8:10,])
+sum(data[8,])
+sum(data$adjGain)
+sum(data$adjstGain)
+sum(data$adjGain)
+data$adjGain
+sum(data$stGain)
+setwd("~/ShinyApps/toscapgain/")#
+theFile <- "data/RC_861525704_20150101_20150321.tsv"#
+data <- read.table(theFile, fill=T,header=T, sep='\t', colClasses=c("factor", "factor", "numeric", "character", "numeric", "character", "numeric", "numeric", "numeric", "numeric" ))#
 #
-theLookup <- "Mary"#
-names <- parseNames(theSex,theYears,theLetters,sortAlpha)
-head(names)
-namesOneSex <- getSexNames(babynames, theSex)
-head(namesOneSex)
-head(babynames)
-namesOneSex <- getSexNames(babynames, theSex)#
-		namesYears  <- getYearsNames(namesOneSex,theYears)#
-		namesLetters<- startsWith(namesYears,theLetters)#
-		namesSorted <- getSorted(namesLetters,sortAlpha)
-head(namesSorted)
-head(namesLetters)
-namesOneSex <- getSexNames(babynames, theSex)#
-		namesYears  <- getYearsNames(namesOneSex,theYears)
-head(namesYears)
-namesYears[namesYears$name==theLookup,]
-namesSorted <- getSorted(namesYears, sortAlpha)
-namesSorted[namesSorted$name==theLookup,]
-head(namesSorted)
-names <- namesAggregated(namesYears(namesOneSex, theSex),theYears)
-aggregateYears <- function(df){#
-	df <- aggregate(df[c("prop")],  by=df[c("name")], FUN="mean")	#
-}#
-getSorted <- function(df, sortAlpha){#
-	df <- subset(df, select=-c(n))#
-	if (sortAlpha) #
-		data <- unique(sort(df$name))#
-	else {#
-		df <- aggregate(df[c("prop")],  by=df[c("name")], FUN="mean")#
-		df <- df[order(df$prop,df$name,decreasing=T),]#
-		data <- df$name	#
-		}#
-	return(data)	#
-	}
-names <- aggregateYears(namesYears(namesOneSex, theSex),theYears)
-names <- aggregateYears(namesYears(namesOneSex(babynames,theSex), theYears))
-getYearsNames <- function(df, yearRange){#
-	df <- df[(df$year>=yearRange[1]) & (df$year<=yearRange[2]),]	#
-	df <- subset(df, select=-c(year))#
-	return(df)#
-}#
-getSexNames <- function(df, theSex){#
-	df <- df[df$sex==theSex,]#
-	df <- subset(df, select=-c(sex))#
-	return(df)#
-}#
-getUniqueNames <- function(data){#
-	data <- unique(data)#
-	return(data)#
-}#
-startsWith <- function(df, letters="bb"){#
-	substr(letters,1,1) <- toupper(substr(letters,1,1))#
-	substr(letters,2,nchar(letters)) <- tolower(substr(letters,2,nchar(letters)))#
-	df <- df[substr(df$name,1,nchar(letters))==letters,]#
-	return(df)#
-}#
-#
-aggregateYears <- function(df){#
-	df <- aggregate(df[c("prop")],  by=df[c("name")], FUN="mean")	#
-}#
-getSorted <- function(df, sortAlpha){#
-	df <- subset(df, select=-c(n))#
-	if (sortAlpha) #
-		data <- unique(sort(df$name))#
-	else {#
-		df <- aggregate(df[c("prop")],  by=df[c("name")], FUN="mean")#
-		df <- df[order(df$prop,df$name,decreasing=T),]#
-		data <- df$name	#
-		}#
-	return(data)	#
-	}#
-#
-parseNames <- function(theSex,theYears,theLetters,sortAlpha){#
-		namesOneSex <- getSexNames(babynames, theSex)#
-		namesYears  <- getYearsNames(namesOneSex,theYears)#
-		namesLetters<- startsWith(namesYears,theLetters)#
-		namesAggregated <- aggregateNames(namesLetters)#
-		namesSorted <- getSorted(namesLetters,sortAlpha)#
-		return(namesSorted)#
-}
-names <- aggregateYears(namesYears(namesOneSex(babynames,theSex), theYears))
-getYearsNames <- function(df, yearRange){#
-	df <- df[(df$year>=yearRange[1]) & (df$year<=yearRange[2]),]	#
-	df <- subset(df, select=-c(year))#
-	return(df)#
-}#
-getSexNames <- function(df, theSex){#
-	df <- df[df$sex==theSex,]#
-	df <- subset(df, select=-c(sex))#
-	return(df)#
-}#
-getUniqueNames <- function(data){#
-	data <- unique(data)#
-	return(data)#
-}#
-startsWith <- function(df, letters="bb"){#
-	substr(letters,1,1) <- toupper(substr(letters,1,1))#
-	substr(letters,2,nchar(letters)) <- tolower(substr(letters,2,nchar(letters)))#
-	df <- df[substr(df$name,1,nchar(letters))==letters,]#
-	return(df)#
-}#
-#
-getAggregatedYears <- function(df){#
-	df <- aggregate(df[c("prop")],  by=df[c("name")], FUN="mean")	#
-}#
-getSorted <- function(df, sortAlpha){#
-	df <- subset(df, select=-c(n))#
-	if (sortAlpha) #
-		data <- unique(sort(df$name))#
-	else {#
-		df <- aggregate(df[c("prop")],  by=df[c("name")], FUN="mean")#
-		df <- df[order(df$prop,df$name,decreasing=T),]#
-		data <- df$name	#
-		}#
-	return(data)	#
-	}#
-#
-parseNames <- function(theSex,theYears,theLetters,sortAlpha){#
-		namesOneSex <- getSexNames(babynames, theSex)#
-		namesYears  <- getYearsNames(namesOneSex,theYears)#
-		namesLetters<- startsWith(namesYears,theLetters)#
-		namesAggregated <- aggregateNames(namesLetters)#
-		namesSorted <- getSorted(namesLetters,sortAlpha)#
-		return(namesSorted)#
-}#
-#
-lookupOneName <-function(theSex, theLookup, theYears){#
-		namesOneSex <- getSexNames(babynames, theSex)#
-		namesYears  <- getYearsNames(namesOneSex,theYears)#
-		namesSorted <- getSorted(namesYears, sortAlpha)#
-		namesSorted[namesSorted$name==theLookup,]#
-}
-names <- getAggregatedYears(getYearNames(getSexNames(babynames,theSex), theYears))
-names <- getAggregatedYears(getYearsNames(getSexNames(babynames,theSex), theYears))
-head(names)
-names <- getAggregatedYears(getYearsNames(getSexNames(babynames,theSex), theYears))
-names[names$name==theLookup]
-names[names$name==theLookup,]
-names[names$name==theLookup,]$prop
-names[names$name==theLookup,]$prop*100
-getSorted(getAggregatedYears(startsWith(getYearsNames(getSexNames(babynames,theSex,theYears),theLetters)),sortAlpha))
-getSorted(getAggregatedYears(startsWith(getYearsNames(getSexNames(babynames,theSex,theYears),theLetters))),sortAlpha)
-names[names$name==theLookup,]$prop*100#
-									getSorted(#
-										getAggregatedYears(#
-											startsWith(#
-												getYearsNames(#
-														getSexNames(babynames,theSex)#
-														,theYears)#
-												,theLetters),#
-									sortAlpha)
-sortAlpha))
-getSorted(#
-										getAggregatedYears(#
-											startsWith(#
-												getYearsNames(#
-														getSexNames(babynames,theSex)#
-														,theYears),#
-												theLetters),#
-											),#
-									sortAlpha)
-getSorted(#
-										getAggregatedYears(#
-											startsWith(#
-												getYearsNames(#
-														getSexNames(babynames,theSex),#
-														theYears),#
-												theLetters),#
-											),#
-									sortAlpha)
-getAggregatedYears <- function(df){#
-	df <- aggregate(df[c("prop")],  by=df[c("name")], FUN="mean")	#
-	return(df)#
-}
-getSorted(#
-										getAggregatedYears(#
-											startsWith(#
-												getYearsNames(#
-														getSexNames(babynames,theSex),#
-														theYears),#
-												theLetters)#
-											),#
-									sortAlpha)
-x <-								getSorted(#
-										getAggregatedYears(#
-											startsWith(#
-												getYearsNames(#
-														getSexNames(babynames,theSex),#
-														theYears),#
-												theLetters)#
-											),#
-									sortAlpha)
-getAggregatedYears(#
-											startsWith(#
-												getYearsNames(#
-														getSexNames(babynames,theSex),#
-														theYears),#
-												theLetters)#
-											)
-sortAlpha
-getSorted <- function(df, sortAlpha){#
-	#df <- subset(df, select=-c(n))#
-	if (sortAlpha) #
-		data <- unique(sort(df$name))#
-	else {#
-		df <- aggregate(df[c("prop")],  by=df[c("name")], FUN="mean")#
-		df <- df[order(df$prop,df$name,decreasing=T),]#
-		data <- df$name	#
-		}#
-	return(data)	#
-	}
-x <-								getSorted(#
-										getAggregatedYears(#
-											startsWith(#
-												getYearsNames(#
-														getSexNames(babynames,theSex),#
-														theYears),#
-												theLetters)#
-											),#
-									sortAlpha)
-x
-lookupOneName <-function(theSex, theLookup, theYears){#
-		namesOneSex <- getSexNames(babynames, theSex)#
-		namesYears  <- getYearsNames(namesOneSex,theYears)#
-		namesSorted <- getSorted(namesYears, sortAlpha)#
-		theFreq <- namesSorted[namesSorted$name==theLookup,]$freq#
-		return(theFreq*100)#
-}
-lookupOneName(theSex,theLook, theYears)
-theFreq <- namesSorted[namesSorted$name==theLookup,]
-namesOneSex <- getSexNames(babynames, theSex)#
-		namesYears  <- getYearsNames(namesOneSex,theYears)#
-		namesSorted <- getSorted(namesYears, sortAlpha)
-theFreq <- namesSorted[namesSorted$name==theLookup,]
-namesSorted$name
-namesSorted
-getSorted <- function(df, sortAlpha){#
-	#df <- subset(df, select=-c(n))#
-	if (sortAlpha) #
-		data <- unique(sort(df$name))#
-	else {#
-		df <- aggregate(df[c("prop")],  by=df[c("name")], FUN="mean")#
-		df <- df[order(df$prop,df$name,decreasing=T),]#
-		data <- df$name	#
-		}#
-	return(data)	#
-	}
-lookupOneName <-function(theSex, theLookup, theYears){#
-		namesOneSex <- getSexNames(babynames, theSex)#
-		namesYears  <- getYearsNames(namesOneSex,theYears)#
-		theFreq <- namesSorted[namesSorted$name==theLookup,]#
-		return(theFreq*100)#
-}
-lookupOneName(theSex,theLook, theYears)
-namesOneSex <- getSexNames(babynames, theSex)#
-		namesYears  <- getYearsNames(namesOneSex,theYears)#
-		theFreq <- namesSorted[namesSorted$name==theLookup,]
-lookupOneName <-function(theSex, theLookup, theYears){#
-		namesOneSex <- getSexNames(babynames, theSex)#
-		namesYears  <- getYearsNames(namesOneSex,theYears)#
-		theFreq <- namesYears[namesYears$name==theLookup,]#
-		return(theFreq*100)#
-}
-lookupOneName(theSex,theLook, theYears)
-namesYears
-theLookup
-namesYears[namesYears$name==theLookup,]
-lookupOneName <-function(theSex, theLookup, theYears){#
-		namesOneSex <- getSexNames(babynames, theSex)#
-		namesYears  <- getYearsNames(namesOneSex,theYears)#
-		theName <- namesYears[namesYears$name==theLookup,]#
-		theFreq <- getAggregatedYears(theName)#
-		return(theFreq*100)#
-}
-lookupOneName(theSex,theLook, theYears)
-namesOneSex <- getSexNames(babynames, theSex)#
-		namesYears  <- getYearsNames(namesOneSex,theYears)
-head(namesYears)
-theName <- namesYears[namesYears$name==theLookup,]
-theName
-getAggregatedYears
-head(theName)
-df <- theName
-df <- aggregate(df[c("prop")],  by=df[c("name")], FUN="mean")
-df
-getAggregatedYears <- function(df){#
-	df <- aggregate(df[c("prop")],  by=df[c("name")], FUN="mean")	#
-	return(df$prop)#
-}
-theFreq <- getAggregatedYears(theName)
-theFreq
-lookupOneName(theSex,theLook, theYears)
-lookupOneName <-function(theSex, theLookup, theYears){#
-		namesOneSex <- getSexNames(babynames, theSex)#
-		namesYears  <- getYearsNames(namesOneSex,theYears)#
-		theName <- namesYears[namesYears$name==theLookup,]#
-		theFreq <- getAggregatedYears(theName)#
-		return(theFreq*100)#
-}
-lookupOneName(theSex,theLook, theYears)
-namesOneSex <- getSexNames(babynames, theSex)#
-		namesYears  <- getYearsNames(namesOneSex,theYears)#
-		theName <- namesYears[namesYears$name==theLookup,]#
-		theFreq <- getAggregatedYears(theName)
-class(theFreq)
-theFreq*100
-lookupOneName(theSex,theLook, theYears)
-lookupOneName <-function(theSex, theLookup, theYears){#
-		namesOneSex <- getSexNames(babynames, theSex)#
-		namesYears  <- getYearsNames(namesOneSex,theYears)#
-		theAgg <- getAggregatedYears(namesYears)#
-		theName <- theAgg[theAgg$name==theLookup,]#
-		return(theFreq*100)#
-}
-lookupOneName(theSex,theLook, theYears)
-getAggregatedYears <- function(df){#
-	df <- aggregate(df[c("prop")],  by=df[c("name")], FUN="mean")	#
-	return(df)#
-}
-parseNames <- function(theSex,theYears,theLetters,sortAlpha){#
-		namesOneSex <- getSexNames(babynames, theSex)#
-		namesYears  <- getYearsNames(namesOneSex,theYears)#
-		namesLetters<- startsWith(namesYears,theLetters)#
-		namesAggregated <- getAggregatedYears(namesLetters)#
-		namesSorted <- getSorted(namesLetters,sortAlpha)#
-		return(namesSorted)#
-}#
-#
-lookupOneName <-function(theSex, theLookup, theYears){#
-		namesOneSex <- getSexNames(babynames, theSex)#
-		namesYears  <- getYearsNames(namesOneSex,theYears)#
-		theAgg <- getAggregatedYears(namesYears)#
-		theName <- theAgg[theAgg$name==theLookup,]#
-		return(theName$freq*100)#
-}
-lookupOneName(theSex,theLook, theYears)
-getYearsNames <- function(df, yearRange){#
-	df <- df[(df$year>=yearRange[1]) & (df$year<=yearRange[2]),]	#
-	df <- subset(df, select=-c(year))#
-	return(df)#
-}#
-getSexNames <- function(df, theSex){#
-	df <- df[df$sex==theSex,]#
-	df <- subset(df, select=-c(sex))#
-	return(df)#
-}#
-getUniqueNames <- function(data){#
-	data <- unique(data)#
-	return(data)#
-}#
-startsWith <- function(df, letters="bb"){#
-	substr(letters,1,1) <- toupper(substr(letters,1,1))#
-	substr(letters,2,nchar(letters)) <- tolower(substr(letters,2,nchar(letters)))#
-	df <- df[substr(df$name,1,nchar(letters))==letters,]#
-	return(df)#
-}#
-#
-getAggregatedYears <- function(df){#
-	df <- aggregate(df[c("prop")],  by=df[c("name")], FUN="mean")	#
-	return(df)#
-}#
-getSorted <- function(df, sortAlpha){#
-	#df <- subset(df, select=-c(n))#
-	if (sortAlpha) #
-		data <- unique(sort(df$name))#
-	else {#
-		df <- aggregate(df[c("prop")],  by=df[c("name")], FUN="mean")#
-		df <- df[order(df$prop,df$name,decreasing=T),]#
-		data <- df$name	#
-		}#
-	return(data)	#
-	}#
-#
-parseNames <- function(theSex,theYears,theLetters,sortAlpha){#
-		namesOneSex <- getSexNames(babynames, theSex)#
-		namesYears  <- getYearsNames(namesOneSex,theYears)#
-		namesLetters<- startsWith(namesYears,theLetters)#
-		namesAggregated <- getAggregatedYears(namesLetters)#
-		namesSorted <- getSorted(namesLetters,sortAlpha)#
-		return(namesSorted)#
-}#
-#
-lookupOneName <-function(theSex, theLookup, theYears){#
-		namesOneSex <- getSexNames(babynames, theSex)#
-		namesYears  <- getYearsNames(namesOneSex,theYears)#
-		theAgg <- getAggregatedYears(namesYears)#
-		theName <- theAgg[theAgg$name==theLookup,]#
-		return(theName$freq*100)#
-}
-lookupOneName(theSex,theLook, theYears)
-startY <- 1880#
-	endY <- 2013#
-	theYears <- c(startY,endY)#
-	sortAlpha <- TRUE#
-	theLetters <- "M"#
-	theSex <- "F"
-lookupOneName(theSex,theLook, theYears)
-namesOneSex <- getSexNames(babynames, theSex)
-namesYears  <- getYearsNames(namesOneSex,theYears)
-theAgg <- getAggregatedYears(namesYears)
-theName <- theAgg[theAgg$name==theLookup,]
-theLookup <- "Mary"
-theName <- theAgg[theAgg$name==theLookup,]
-theName$freq*100
-theName
-theName$prop*100
-lookupOneName <-function(theSex, theLookup, theYears){#
-		namesOneSex <- getSexNames(babynames, theSex)#
-		namesYears  <- getYearsNames(namesOneSex,theYears)#
-		theAgg <- getAggregatedYears(namesYears)#
-		theName <- theAgg[theAgg$name==theLookup,]#
-		return(theName$prop*100)#
-}
-lookupOneName(theSex,theLook, theYears)
-lookupOneName
-theSex
-theLook
-lookupOneName(theSex,theLookup, theYears)
-?quantile
-?ecdf
-x <- c(1:100)
-quantile(x, 10)
-quantile(x,.2)
-summary(x,.2)
-summary(x,10)
-summary(x)
-perc.rank <- function(x) trunc(rank(x))/length(x)
-perc.rank(x)
-x
-theAgg$rank <- perc.rank(theAgg$prop)
-theName <- theAgg[theAgg$name==theLookup,]
-theName
-theLookup <- "Mildred"
-theAgg[theAgg$name==theLookup,]
-theLookup <- "Margaret"
-theAgg[theAgg$name==theLookup,]
-x <- theAgg$prop
-head(x)
-xr <- rank(x)
-head(xr)
-length(x)
-#painful scraping#
- library("RCurl")#
-#
-#cefURL <- readLines("http://us.allianzgi.com/Products/pages/PlCEF.aspx?Level1=ulProducts&Center=ulProducts&Level2=liulProductsClosedEndFunds")#
-pimcoURL <- "https://investments.pimco.com/Products/Pages/PlCEF.aspx"#
-#cef <- readLines(cefURL)#
-pimco  <- getURLContent(pimcoURL)#
-#
-pimco <- unlist(strsplit(pimco,"\r\n"))#
-#replace " _ " with zeros#
-pimco2 <- sub(">-<.",">0.0%",pimco)#
-pimco3 <- gsub("0%.*", "0%", pimco2)
-head(pimco3)
-percentLines <- grep(">-?[0-9\\.\\0-9]*%",pimco3)
-head(percentLines)
-pl <- pimco3[percentLines]
-pl
-write(pimco3,"pimco3")
-dollarLines <- grep("\$[0-9\\.\\0-9]*",pimco3)
-dollarLines <- grep("$[0-9\\.\\0-9]*",pimco3)
-dollarLines
-dollarLines <- grep("\\$[0-9\\.\\0-9]*",pimco3)
-dolllarLines
-dollarLines
-dl <- pimco3[dollarLines]
-dl
-dollarLines <- grep("\\$[0-9\\.\\0-9]*",pimco3)
-pimcoURL <- "https://investments.pimco.com/Products/Pages/PlCEF.aspx"#
-#cef <- readLines(cefURL)#
-pimco  <- getURLContent(pimcoURL)#
-#
-pimco <- unlist(strsplit(pimco,"\r\n"))#
-#replace " _ " with zeros#
-pimco2 <- sub(">-<.",">0.0%",pimco)#
-pimco3 <- gsub("0%.*", "0%", pimco2)#
-percentLines <- grep(">-?[0-9\\.\\0-9]*%",pimco3)#
-dollarLines <- grep("\\$[0-9\\.\\0-9]*",pimco3)
-#painful scraping#
- library("RCurl")#
-#
-#cefURL <- readLines("http://us.allianzgi.com/Products/pages/PlCEF.aspx?Level1=ulProducts&Center=ulProducts&Level2=liulProductsClosedEndFunds")#
-pimcoURL <- "https://investments.pimco.com/Products/Pages/PlCEF.aspx"#
-#cef <- readLines(cefURL)#
-pimco  <- getURLContent(pimcoURL)#
-#
-pimco <- unlist(strsplit(pimco,"\r\n"))#
-#replace " _ " with zeros#
-pimco2 <- sub(">-<.",">0.0%",pimco)#
-pimco3 <- gsub("0%.*", "0%", pimco2)#
-percentLines <- grep(">-?[0-9\\.\\0-9]*%",pimco3)#
-dollarLines <- grep("\\$[0-9\\.\\0-9]*",pimco3)
-pl <- pimco3[percentLines]#
-dl <- pimco3[dollarLines]
-dl
-shinyapps::showLogs("openinterest")
-help(getSymbols)
-#local test #
+names(data) <- c("Security","Trans.type","Qty","Open.date","Adj.cost","Close.date","Adj.proceeds","adjGain","stGain","ltGain")
+sum(data$stGain)
+summary(data)
+help(sum)
+colSums(data["adjGain":"ltGain",])
+colSums(data[,8:10])
+data$adjGain
+data$stGain
+colSums(data)
+colSums(data$stGain)
+colSums(data[,8:10])
+class(data$stGain)
+colSums(data[,8:10])
+runApp("simpleoption")
 library(shiny)#
-library(quantmod)#
-library(ggplot2)#
-#
-#use command f3#
-#
-setwd("~/ShinyApps/openinterest")#
-source("source/yahooInput.R")#
-source("source/openIntFunctions.R")#
-source("source/plotFunctions.R")#
-source("source/getOptionChainPatch.R")
-#local test #
-library(shiny)#
-library(quantmod)#
-library(ggplot2)#
-#
-#use command f3#
-#
-setwd("~/ShinyApps/openinterest")#
-source("source/yahooInput.R")#
-source("source/openIntFunctions.R")#
-source("source/plotFunctions.R")#
-source("source/getOptionChainPatch.R")#
-#
-doDebug <<- T#
-stock <- "AAPL"#
-yymmdd <- "150320"#
-strikes <- 16#
-smoothOn <- F#
-pinByStrikes <- F#
-#
-lastQuote <- getQuote(stock)$Last
-lastQuote
-openInt <- getYahooDataReformatted(stock, yymmdd)
-head(openInt)
-head(openInt,100)
+library(shinyapps)#
+setwd("~/ShinyApps")
+runApp("simpleoption")
+help(withProgress)
+help(withProgress)
+runApp("simpleoption")
+runApp("simpleoption")
+runApp("simpleoption")
+runApp("simpleoption")
+runApp("simpleoption")
+runApp("simpleoption")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+c
+c
+c
+runApp("openinterest")
+runApp("openinterest")
+xAxisPar <- c(1,2)
+names(xAxisPar) <- c("theN", "theSize")
+xAxisPar("theSize")
+xAxisPar
+xAxisPar["theSize"]
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+deployApp("openinterest")
+runApp("openinterest")
+deployApp("openinterest")
+help(progress_time)
+l_ply(1:100, function(x) Sys.sleep(.01), .progress = "time")
+??l_ply
+library(l_ply)
+library(plyr)
+l_ply(1:100, function(x) Sys.sleep(.01), .progress = "time")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")
+runApp("openinterest")

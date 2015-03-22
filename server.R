@@ -5,7 +5,7 @@ library(ggplot2)
 
 #use command f3
 doDebug <<- F
-doProgress <<- F
+doP <<- T
 source("source/yahooInput.R")
 source("source/openIntFunctions.R")
 source("source/plotFunctions.R")
@@ -36,27 +36,26 @@ wasUpdatedToday <- function(stock,chain,expText) {
 		return("")
 	}
 
+
 shinyServer(function(input, output, session) {
 	graphType <- reactive({input$graphType})
 	stockText <- reactive({toupper(input$stock)})
 	expText <- reactive({input$yymmdd})
 	strikes <- reactive({input$strikes})
 	smoothOn <- reactive({input$smoothOn})
-	
+
 	lastQuote <- reactive({getQuote(stockText())$Last})
 	chain <- reactive({getYahooDataReformatted(stockText(), expText())})
 	output$caption <- renderText({paste(stockText(), " $", lastQuote(), " Expiration ", expText())})
 	output$subCaption <- reactive({wasUpdatedToday(stockText(),chain(),expText())})
-	
 	cleanChain <- reactive({cleanUpChain(chain())})
-	strikePar <- reactive({setupStrikeParam(chain(), stock(), strikes(), lastQuote(), smoothOn())})
+	strikePar <- reactive({setupStrikePar(chain(), stock(), strikes(), lastQuote(), smoothOn())})
 	subChain <- reactive({truncChain(chain(), strikePar(), smoothOn())})
 	output$pinCaption <- renderText({paste("Expiration Pin Range:", getPin(subChain()), "  (see notes)")})
 
 output$openIntPlot <- renderPlot({
-
     if (!is.null(chain())) 
-    	p <- switch(graphType(),
+    	switch(graphType(),
 		"OI"=plotOpen(subChain(),strikePar()),
 		"OIvol"= plotVolume(subChain(),strikePar()),
 		"OIDiff"=plotDifference(subChain(),strikePar()),
@@ -64,7 +63,7 @@ output$openIntPlot <- renderPlot({
 		"cummDiff"=plotCummDiff(subChain(),strikePar()),
 		"prettyPlot"=plotDensity(subChain(),strikePar()))
 	 else
-		plotError("No Data.  Either wrong date for this stock, or no prior data")	 
-	p
+		plotError("No Data.  Either wrong date for this stock, or no prior data")	
+	print(p)
 	})
 })
