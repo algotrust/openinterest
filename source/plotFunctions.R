@@ -26,8 +26,8 @@ adjustStrikesForSmoothing <- function(strikes, smoothOn) {
 	else
 		return(strikes)
 }
-subsetOIforStrikes <- function(openInt, strikeParam, smoothOn) {
-	sp <- strikeParam
+subsetOIforStrikes <- function(openInt, strikePar, smoothOn) {
+	sp <- strikePar
 	openInt <- subset(openInt, (strike >= sp$lower) & (strike <= sp$upper))
 	#remove points less than interval
 	if (smoothOn){
@@ -84,20 +84,20 @@ putCallPlots <- function(openInt, sp) {
 	p <- p + theme(legend.justification=c(1,1), legend.position=c(1,1))
 	return(p)
 }
-setupStrikeParam <- function(openInt, stock, strikes, lastQuote, smoothOn){
-	strikeParam <- getStrikes(openInt, stock, strikes, lastQuote)
-	strikeParam$strikes <- adjustStrikesForSmoothing(strikeParam$strikes, smoothOn)
-	if (doDebug) cat("setupStrikeParam, interval, strikes", strikeParam$interval, strikeParam$strikes, "\n")
-	return(strikeParam)
+setupStrikePar <- function(openInt, stock, strikes, lastQuote, smoothOn){
+	strikePar <- getStrikes(openInt, stock, strikes, lastQuote)
+	strikePar$strikes <- adjustStrikesForSmoothing(strikePar$strikes, smoothOn)
+	if (doDebug) cat("setupStrikePar, interval, strikes", strikePar$interval, strikePar$strikes, "\n")
+	return(strikePar)
 }
-plotDensity <- function(openInt, strikeParam) {
-	p <- putCallPlots(openInt, strikeParam)
+plotDensity <- function(openInt, strikePar) {
+	p <- putCallPlots(openInt, strikePar)
 	p <- p + ylab("open interest")
 	return(p)
 }
-plotCumm <- function(openInt, strikeParam) {
+plotCumm <- function(openInt, strikePar) {
 	diff <- "blue"
-	p <- cummPlots(openInt, strikeParam)
+	p <- cummPlots(openInt, strikePar)
 	#modifications
 	p <- p + geom_area(aes(y = cumPuts, fill = "1 put", colour = "1 put",stat="bin"),alpha=0.5)
 	p <- p + geom_area(aes(y = cumCalls, colour = "2 call", fill = "2 call", stat = "bin"), 
@@ -105,25 +105,25 @@ plotCumm <- function(openInt, strikeParam) {
 	p <- p + ylab("Cummulative")
 	return(p)
 }
-plotCummDiff <- function(openInt, strikeParam) {
+plotCummDiff <- function(openInt, strikePar) {
 	diff <- "green"
-	p <- cummPlots(openInt, strikeParam)
+	p <- cummPlots(openInt, strikePar)
 	p <- p + geom_area(aes(y = cumDiff, fill = "put", colour = "diff", stat = "bin"), 
 		alpha = 0.5)
 	p <- p + ylab("Cummulative difference ")
 	return(p)
 }
-plotVolume <- function(openInt, strikeParam) {
-	p <- cummPlots(openInt, strikeParam)
+plotVolume <- function(openInt, strikePar) {
+	p <- cummPlots(openInt, strikePar)
 	p <- p + geom_line(aes(y = callsVol, colour = "2 call"))
 	p <- p + geom_line(aes(y = putsVol, colour = "1 put"))
 	p <- p + ylab("Volumes")
 	return(p)
 }
-plotDifference <- function(openInt, strikeParam) {
+plotDifference <- function(openInt, strikePar) {
 	title <- ""
 	callPutDiff <- "blue"
-	p <- cummPlots(openInt, strikeParam)
+	p <- cummPlots(openInt, strikePar)
 	p <- p + geom_line(aes(y = callOI - putOI, colour = "callPutDiff"))
 	p <- p + ylab("difference in call/put open interest")
 	p <- p + geom_hline(yintercept = 0)

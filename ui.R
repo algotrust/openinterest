@@ -33,23 +33,6 @@ expirations <<- c(
                  	  "Jan 20* 2017"="170120"
                      )
 expirations <<- removeOld(expirations)
-# googleAnalytics <- function(account="UA-27455672-5"){
-  # HTML(paste("<script type=\"text/javascript\">
-
-             # var _gaq = _gaq || [];
-             # _gaq.push(['_setAccount', '",account,"']);
-             # _gaq.push(['_setDomainName', 'bravo.shinyapps.io']);
-             # _gaq.push(['_trackPageview']);
-             
-             # (function() {
-             # var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-             # ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-             # var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-             # })();
-
-
-  # </script>", sep=""))
-# }
 shinyUI(
 
   pageWithSidebar(
@@ -58,9 +41,8 @@ shinyUI(
       selectInput("graphType", "Type:",
                   list(
                     "Open Interest" = "prettyPlot",
-                    "Dark Theme" = "plotBW",
                     "Volume" = "OIvol",
-                   "Call-Put OI difference" = "OIdiff",
+                   "Call-Put OI difference" = "OIDiff",
                     "Cummulative OI"="cummulative",
                     "Cummulative Diff"="cummDiff")),
                     
@@ -86,8 +68,5 @@ shinyUI(
     h5(textOutput("subCaption")),
     h5(textOutput("pinCaption")),
   #  h5("", a("Blog for more info", href="http://bravo0123.tumblr.com")),
-  #	withProgress(message = 'be patient!', value = .9, {
     plotOutput("openIntPlot")
-   # })
-   # googleAnalytics()
   )))
