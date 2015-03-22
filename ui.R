@@ -67,10 +67,7 @@ shinyUI(
        checkboxInput("smoothOn",
       			label = strong("Smooth strike interval?"),
       			value = F),
-      	checkboxInput("pinByStrikes",
-      			label = strong("Use strike range to find pin?"),
-      			value = F),
-      
+
       textInput("stock","Stock symbol:", value="AAPL"),
       
       selectInput("yymmdd", "Expiration:", choices = expirations),

@@ -37,7 +37,6 @@ wasUpdatedToday <- function(stock,chain,expText) {
 	}
 
 shinyServer(function(input, output, session) {
-	pinByStrikes <- reactive({input$pinByStrikes})
 	graphType <- reactive({input$graphType})
 	stockText <- reactive({toupper(input$stock)})
 	expText <- reactive({input$yymmdd})
@@ -60,7 +59,7 @@ output$openIntPlot <- renderPlot({
 	#withProgress(message = 'waiting for plot', value = 0, {
     if (!is.null(chain()))
     
-    	p <- getPlot(graphType(),chain(), stockText(), strikes(), lastQuote(), smoothOn(), pinByStrikes())
+    	p <- getPlot(graphType(),chain(), stockText(), strikes(), lastQuote(), smoothOn())
 	else
 		plotError("No Data.  Either wrong date for this stock, or no prior data")	
 #	if (doProgress)		incProgress(0.9, detail = "outputting plot")

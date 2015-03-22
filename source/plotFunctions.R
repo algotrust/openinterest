@@ -18,7 +18,6 @@ getStrikes <- function(openInt, stock, strikes, lastQuote){
 	interval <- openInt[maxStrikeInd+1,]$strike - openInt[maxStrikeInd,]$strike
 	if (is.na(interval))
 		interval <- 1
-	if (doDebug) cat("getStrikes:  lower ", lower, " upper ", upper, " interval ", interval,"\n")
 	return(data.frame(lower, upper, interval, strikes))	
 }
 adjustStrikesForSmoothing <- function(strikes, smoothOn) {
@@ -29,7 +28,6 @@ adjustStrikesForSmoothing <- function(strikes, smoothOn) {
 }
 subsetOIforStrikes <- function(openInt, strikeParam, smoothOn) {
 	sp <- strikeParam
-	if (doDebug) cat("subsetOIforStrikes, lower, upper, interval", sp$lower, "   ", sp$upper, "    ", sp$interval, "\n")
 	openInt <- subset(openInt, (strike >= sp$lower) & (strike <= sp$upper))
 	#remove points less than interval
 	if (smoothOn){
@@ -44,7 +42,8 @@ subsetOIforStrikes <- function(openInt, strikeParam, smoothOn) {
 	}}
 	return(openInt)
 }
-plotDefaults <- function(openInt, sp, standardPlot=TRUE) {
+
+useStrikesSetSize <- function(sp){
 	maxN <-100
 	theN <- round((sp$upper - sp$lower)/sp$interval)
 	if (theN >maxN) 
@@ -53,19 +52,36 @@ plotDefaults <- function(openInt, sp, standardPlot=TRUE) {
 		theSize <- 7
 	else
 		theSize <- 12
+	xAxisPar <- c(theN, theSize)
+	names(xAxisPar) <- c("theN", "theSize")
+	return(xAxisPar)
+	
+}
+
+cummPlots <- function(openInt, sp){
+	xAxisPar <- useStrikesSetSize(sp)
 	p <- ggplot(openInt, aes(x=strike))
-	if (standardPlot){
+	p <- p + scale_x_continuous(breaks = pretty(sp$lower:sp$upper, n = xAxisPar["theN"]))
+	p <- p + theme(legend.title = element_blank())
+	p <- p + theme(axis.text.x=element_text(angle=90,size=xAxisPar["theSize"]))
+	#hide horizontal gridlines
+	p <- p + theme(panel.grid.minor.y = element_blank(), panel.grid.major.y = element_blank())
+
+
+}
+putCallPlots <- function(openInt, sp) {
+		xAxisPar <- useStrikesSetSize(sp)
+		p <- ggplot(openInt, aes(x=strike))
 		p <- p + geom_area(aes(y = putOI,  fill = "1 put", colour = "1 put",   stat = "bin"), alpha = 0.5)
 		p <- p + geom_area(aes(y = callOI, fill = "2 call",colour = "2 call",  stat = "bin"), alpha = 0.5)
 		p <- p + geom_point(aes(y=callOI), size=1.5, alpha=.5, color="blue")
 		p <- p + geom_point(aes(y=putOI),  size=1.5, alpha=.5, color="red")
-		}
-	p <- p + scale_x_continuous(breaks = pretty(sp$lower:sp$upper, n = theN))
+	p <- p + scale_x_continuous(breaks = pretty(sp$lower:sp$upper, n = xAxisPar["theN"]))
 	p <- p + theme(legend.title = element_blank())
-	p <- p + theme(axis.text.x=element_text(angle=90,size=theSize))
+	p <- p + theme(axis.text.x=element_text(angle=90,size=xAxisPar["theSize"]))
 	#hide horizontal gridlines
 	p <- p + theme(panel.grid.minor.y = element_blank(), panel.grid.major.y = element_blank())
-#axis.text.x = element_text(colour="grey20",size=20,angle=90,hjust=.5,vjust=.5,face="plain"),
+
 	return(p)
 }
 setupStrikeParam <- function(openInt, stock, strikes, lastQuote, smoothOn){
@@ -76,24 +92,14 @@ setupStrikeParam <- function(openInt, stock, strikes, lastQuote, smoothOn){
 }
 
 plotDensity <- function(openInt, strikeParam) {
-	if (doDebug) cat("plotDensity\n")
-	p <- plotDefaults(openInt, strikeParam)
-	p <- p + ylab("open interest")
-	return(p)
-}
-plotBW <- function(openInt, strikeParam) {
-	if (doDebug) cat("plotBW\n")
-
-	p <- plotDefaults(openInt, strikeParam)
-	p <- p +  theme_solarized_2(base_size = 14,light=F) + theme(legend.title = element_blank())
+	p <- putCallPlots(openInt, strikeParam)
 	p <- p + ylab("open interest")
 	return(p)
 }
 plotCumm <- function(openInt, strikeParam) {
-	if (doDebug) cat("plotCumm\n")
-	diff <- "blue"
 
-	p <- plotDefaults(openInt, strikeParam, FALSE)
+	diff <- "blue"
+	p <- cummPlots(openInt, strikeParam)
 	#modifications
 	p <- p + geom_area(aes(y = cumPuts, fill = "1 put", colour = "1 put",stat="bin"),alpha=0.5)
 	p <- p + geom_area(aes(y = cumCalls, colour = "2 call", fill = "2 call", stat = "bin"), 
@@ -103,30 +109,24 @@ plotCumm <- function(openInt, strikeParam) {
 	return(p)
 }
 plotCummDiff <- function(openInt, strikeParam) {
-	if (doDebug) cat("plotCummDiff \n")
 	diff <- "green"
-
-	p <- plotDefaults(openInt, strikeParam, FALSE)
+	p <- cummPlots(openInt, strikeParam)
 	p <- p + geom_area(aes(y = cumDiff, fill = "put", colour = "diff", stat = "bin"), 
 		alpha = 0.5)
 	p <- p + ylab("Cummulative difference ")
 	return(p)
 }
 plotVolume <- function(openInt, strikeParam) {
-	if (doDebug) cat("plotVolume\n")
-
-	p <- plotDefaults(openInt, strikeParam, FALSE)
+	p <- cummPlots(openInt, strikeParam)
 	p <- p + geom_line(aes(y = callsVol, colour = "2 call"))
 	p <- p + geom_line(aes(y = putsVol, colour = "1 put"))
 	p <- p + ylab("Volumes")
 	return(p)
 }
 plotDifference <- function(openInt, strikeParam) {
-	if (doDebug) cat("plotDifference\n")
 	title <- ""
 	callPutDiff <- "blue"
-
-	p <- plotDefaults(openInt, strikeParam, FALSE)
+	p <- cummPlots(openInt, strikeParam)
 	p <- p + geom_line(aes(y = callOI - putOI, colour = "callPutDiff"))
 	p <- p + ylab("difference in call/put open interest")
 	p <- p + geom_hline(yintercept = 0)
@@ -142,35 +142,23 @@ getPin <- function(openInt){
 	minPutCallDiff <- min(abs(openInt$cumDiff))
 	withOutMin <- openInt[abs(openInt$cumDiff)!=minPutCallDiff,]
 	min2PutCallDiff <- min(abs(withOutMin$cumDiff))
-		pin <- openInt[abs(openInt$cumDiff)==minPutCallDiff,"strike"]
-		pin2 <- openInt[abs(openInt$cumDiff)==min2PutCallDiff,"strike"]
+	pin <- openInt[abs(openInt$cumDiff)==minPutCallDiff,"strike"]
+	pin2 <- openInt[abs(openInt$cumDiff)==min2PutCallDiff,"strike"]
 	pinRange <- c(pin, pin2)
 	pinRange <- sort(pinRange)
-	if (doDebug) cat("getPin: diff, pin: ",minPutCallDiff, pin, "\n")
 	return(pinRange)
 }
-getPlot <- function(type, openInt, stock, strikes, lastQuote, smoothOn, pinByStrikes) {	
-#x <- system.time(	
-	if (pinByStrikes){
-		strikeParam <- setupStrikeParam(openInt, stock, strikes, lastQuote, smoothOn)
-		openInt <- subsetOIforStrikes(openInt, strikeParam, smoothOn)
-		openInt <- getRidofNA(openInt)
-		openInt <- addCumm(openInt)
-		openInt <- invertPutOrder(openInt)
-		pin <- getPin(openInt)
-		}
-	else{
-		openInt <- getRidofNA(openInt)
-		openInt <- addCumm(openInt)
-		openInt <- invertPutOrder(openInt)
-		pin <- getPin(openInt)
-		strikeParam <- setupStrikeParam(openInt, stock, strikes, lastQuote, smoothOn)
-		openInt <- subsetOIforStrikes(openInt, strikeParam, smoothOn)
-		openInt <- addCumm(openInt)
-		openInt <- invertPutOrder(openInt)
-		}
-	if (doProgress)	incProgress(0.4, detail = "got plot data")		
 
+getPlot <- function(type, openInt, stock, strikes, lastQuote, smoothOn) {	
+#x <- system.time(	
+	openInt <- getRidofNA(openInt)
+	openInt <- addCumm(openInt)
+	openInt <- invertPutOrder(openInt)
+	pin <- getPin(openInt)
+	strikeParam <- setupStrikeParam(openInt, stock, strikes, lastQuote, smoothOn)
+	openInt <- subsetOIforStrikes(openInt, strikeParam, smoothOn)
+	openInt <- addCumm(openInt)
+	openInt <- invertPutOrder(openInt)	
 	p <- switch(type,
 		"OI"=plotOpen(openInt,strikeParam),
 		"OIvol"= plotVolume(openInt,strikeParam),
@@ -179,9 +167,7 @@ getPlot <- function(type, openInt, stock, strikes, lastQuote, smoothOn, pinByStr
 		"cummDiff"=plotCummDiff(openInt,strikeParam),
 		"prettyPlot"=plotDensity(openInt,strikeParam),
 		"plotBW"=plotBW(openInt,strikeParam))
-	if (doProgress)	incProgress(0.8, detail = "plot done")
 	p <- p + ggtitle(paste("Expiration Pin Range:", pin[1],":",pin[2], "  (see notes)"))
 	p <- p + theme(legend.justification=c(1,1), legend.position=c(1,1)) 
-	if (doProgress)	incProgress(0.9, detail = "title done")
 	return(p)	
 }
