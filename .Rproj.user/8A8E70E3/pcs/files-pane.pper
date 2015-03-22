@@ -1,0 +1,9 @@
+{
+    "path" : "~/ShinyApps/openinterest",
+    "sortOrder" : [
+        {
+            "ascending" : true,
+            "columnIndex" : 2
+        }
+    ]
+}
