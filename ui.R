@@ -28,28 +28,22 @@ expirations <<- c(
            			"Mar 13"="150313",
            			"Mar* 20"="150320",
            			"Mar 27"="150327",
+           			"Apr 3"="150403",
+           			"Apr 10"="150410",
            			"Apr* 17"="150417",
+           			"Apr 24"="150424",
+           			"May 1"="150501",
+           			"May 8"="150508",
+           			"May* 15"="150515",
+           			"May 22"="150522",
+           			"Jun 5"="150605",
+           			"Jun 12"="150612",
+           			"Jun* 19"="150619",
+           			"Jul* 17"="150717",
            			"Jan 15* 2016"="160115",
                  	  "Jan 20* 2017"="170120"
                      )
 expirations <<- removeOld(expirations)
-# googleAnalytics <- function(account="UA-27455672-5"){
-  # HTML(paste("<script type=\"text/javascript\">
-
-             # var _gaq = _gaq || [];
-             # _gaq.push(['_setAccount', '",account,"']);
-             # _gaq.push(['_setDomainName', 'bravo.shinyapps.io']);
-             # _gaq.push(['_trackPageview']);
-             
-             # (function() {
-             # var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-             # ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-             # var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-             # })();
-
-
-  # </script>", sep=""))
-# }
 shinyUI(
 
   pageWithSidebar(
@@ -58,19 +52,15 @@ shinyUI(
       selectInput("graphType", "Type:",
                   list(
                     "Open Interest" = "prettyPlot",
-                    "Dark Theme" = "plotBW",
                     "Volume" = "OIvol",
-                   "Call-Put OI difference" = "OIdiff",
+                   "Call-Put OI difference" = "OIDiff",
                     "Cummulative OI"="cummulative",
                     "Cummulative Diff"="cummDiff")),
                     
        checkboxInput("smoothOn",
       			label = strong("Smooth strike interval?"),
       			value = F),
-      	checkboxInput("pinByStrikes",
-      			label = strong("Use strike range to find pin?"),
-      			value = F),
-      
+
       textInput("stock","Stock symbol:", value="AAPL"),
       
       selectInput("yymmdd", "Expiration:", choices = expirations),
@@ -87,9 +77,7 @@ shinyUI(
   mainPanel(
     h3(textOutput("caption")), 
     h5(textOutput("subCaption")),
+    h5(textOutput("pinCaption")),
   #  h5("", a("Blog for more info", href="http://bravo0123.tumblr.com")),
-  #	withProgress(message = 'be patient!', value = .9, {
     plotOutput("openIntPlot")
-   # })
-   # googleAnalytics()
   )))
