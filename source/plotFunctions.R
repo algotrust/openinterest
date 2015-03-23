@@ -143,7 +143,7 @@ getPin <- function(openInt){
 	pin2 <- openInt[abs(openInt$cumDiff)==min2PutCallDiff,"strike"]
 	pinRange <- c(pin, pin2)
 	pinRange <- sort(pinRange)
-	pinText <- paste(pin[1],":",pin[2])
+	pinText <- paste(pin,":",pin2)
 	return(pinText)
 }
 cleanUpChain <- function(openInt){

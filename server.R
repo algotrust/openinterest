@@ -4,6 +4,7 @@ library(quantmod)
 library(ggplot2)
 
 #use command f3
+#options(shiny.reactlog=TRUE)
 doDebug <<- F
 doP <<- T
 source("source/yahooInput.R")
