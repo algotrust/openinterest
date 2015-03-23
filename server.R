@@ -43,7 +43,8 @@ shinyServer(function(input, output, session) {
 	expText <- reactive({input$yymmdd})
 	strikes <- reactive({input$strikes})
 	smoothOn <- reactive({input$smoothOn})
-
+    progress <- shiny::Progress$new()
+    progress$set(message = "Computing data", value = 0)
 	lastQuote <- reactive({getQuote(stockText())$Last})
 	chain <- reactive({getYahooDataReformatted(stockText(), expText())})
 	output$caption <- renderText({paste(stockText(), " $", lastQuote(), " Expiration ", expText())})
@@ -52,10 +53,10 @@ shinyServer(function(input, output, session) {
 	strikePar <- reactive({setupStrikePar(chain(), stock(), strikes(), lastQuote(), smoothOn())})
 	subChain <- reactive({truncChain(chain(), strikePar(), smoothOn())})
 	output$pinCaption <- renderText({paste("Expiration Pin Range:", getPin(subChain()), "  (see notes)")})
-
+    progress$set(message = "generate plot", value = .5)
 output$openIntPlot <- renderPlot({
     if (!is.null(chain())) 
-    	switch(graphType(),
+    	p <- switch(graphType(),
 		"OI"=plotOpen(subChain(),strikePar()),
 		"OIvol"= plotVolume(subChain(),strikePar()),
 		"OIDiff"=plotDifference(subChain(),strikePar()),
@@ -64,6 +65,7 @@ output$openIntPlot <- renderPlot({
 		"prettyPlot"=plotDensity(subChain(),strikePar()))
 	 else
 		plotError("No Data.  Either wrong date for this stock, or no prior data")	
-	print(p)
+		progress$set(message = "display plot", value = .8)
+	p
 	})
 })
